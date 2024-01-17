@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { IndexedPokemon, PokemonListResponse } from '../interfaces/pokemon.interface';
-import { POKEMON_API_POKEMON_URL } from '../constants/pokemon.constants';
+import { IndexedPokemon, PokemonListResponse, ListPokemon } from '../interfaces/pokemon.interface';
+import { POKEMON_API_POKEMON_URL, POKEMON_IMAGES_BASE_URL } from '../constants/pokemon.constants';
 import { httpClient } from '../api/httpsClient';
 
 
 function usePokemons() {
     // TABLEAU DE POKEMONs INITIALISER EN TABLEAU VIDE
     const [pokemons, setPokemons] = useState<IndexedPokemon[]>([]);
+
 
     // CONSTANTE URL INITIALISER SUR URL POKEMON
     const [nextUrl, setNextUrl] = useState<string | null> 
@@ -15,6 +16,21 @@ function usePokemons() {
     useEffect (() => {
         fetchPokemon()
     }, [])
+
+
+    // recoit la string à remplacer par l'url PokeAPI et renvoie une nouvelle chaîne vide (reste la barre / et le numéro du pokemon )
+    // convertit analyse le nombre convertir en string et renvoie un entier
+    const indexPokeToListPoke = (IndexedPokemon: IndexedPokemon) => {
+        const pokedexNumber = parseInt(IndexedPokemon.url.replace(`${POKEMON_API_POKEMON_URL}/`, "").replace("/", ""))
+
+        const listPokemon: ListPokemon = {
+        name: IndexedPokemon.name,
+        url: IndexedPokemon.url,
+        image: `${POKEMON_IMAGES_BASE_URL}/${pokedexNumber}.png`,
+        pokedexNumber
+        }
+    } 
+
 
     // RÉCUPÈRE LES POKEMONS - APPEL API
     const fetchPokemon = async () => {
@@ -34,4 +50,4 @@ function usePokemons() {
     }
 }
 
-export default usePokemons
+export default usePokemons;
