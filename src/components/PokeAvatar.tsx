@@ -16,19 +16,19 @@ function PokeAvatar({pokemon}: PokemonAvatarProps) {
                 title={pokemon.name}>
             </CardMedia>
         <CardContent>
-        <Box sx={{
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}>
-          <Typography sx={{textTransform: "capitalize", color: "white"}}>
-            {pokemon.name}
-          </Typography>
-          <Typography sx={{textTransform: "capitalize", color: "white"}}>
-            #{pokemon.id}
-          </Typography>
-        </Box>
+            <Box sx={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+            }}>
+                <Typography sx={{textTransform: "capitalize", color: "white"}}>
+                    {pokemon.name}
+                </Typography>
+                <Typography sx={{textTransform: "capitalize", color: "white"}}>
+                    #{pokemon.id}
+                </Typography>
+            </Box>
         </CardContent>
     </Card>
   )

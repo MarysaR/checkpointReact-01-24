@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import usePokemonD from "../hooks/usePokemonD";
 import { Box, Container, Grid } from "@mui/material";
 import PokeAvatar from "./PokeAvatar";
+import PokeInfo from "./PokeInfo";
 
 function PokeDetail() {
     let {pokemonName} = useParams();
@@ -29,6 +30,9 @@ function PokeDetail() {
                             <>
                                 <Grid item xs={12} sm={6}>
                                     <PokeAvatar pokemon={pokemon}/>
+                                </Grid>
+                                <Grid item xs={12} sm={6}>
+                                    <PokeInfo pokemon={pokemon}/>
                                 </Grid>
                             </>
                         ) : (
