@@ -1,4 +1,4 @@
-import { IndexedPokemon, ListPokemon } from "../interfaces/pokemon.interface";
+import { ListPokemon } from "../interfaces/pokemon.interface";
 import PokeCard  from "./PokeCard";
 import { Grid } from "@mui/material";
 
