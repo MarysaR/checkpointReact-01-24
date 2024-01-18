@@ -6,7 +6,7 @@ import { httpClient } from '../api/httpsClient';
 
 function usePokemons() {
     // TABLEAU DE POKEMONs INITIALISER EN TABLEAU VIDE
-    const [pokemons, setPokemons] = useState<IndexedPokemon[]>([]);
+    const [pokemons, setPokemons] = useState<ListPokemon[]>([]);
 
 
     // CONSTANTE URL INITIALISER SUR URL POKEMON
@@ -18,8 +18,6 @@ function usePokemons() {
     }, [])
 
 
-    // recoit la string à remplacer par l'url PokeAPI et renvoie une nouvelle chaîne vide (reste la barre / et le numéro du pokemon )
-    // convertit analyse le nombre convertir en string et renvoie un entier
     const indexPokeToListPoke = (IndexedPokemon: IndexedPokemon) => {
         const pokedexNumber = parseInt(IndexedPokemon.url.replace(`${POKEMON_API_POKEMON_URL}/`, "").replace("/", ""))
 
@@ -29,25 +27,27 @@ function usePokemons() {
         image: `${POKEMON_IMAGES_BASE_URL}/${pokedexNumber}.png`,
         pokedexNumber
         }
+        return listPokemon
     } 
 
-
-    // RÉCUPÈRE LES POKEMONS - APPEL API
+    // APPEL API - RÉCUPÈRE LES POKEMONS - MAPPE CHAQUE POKEMON INDEXE DE LA REP API À L'INDEX POKEMON LISTPOKEMON 
     const fetchPokemon = async () => {
         if (nextUrl) {
-            const result = await httpClient.get<PokemonListResponse>(nextUrl)
-            // Chainage optionnel simplifie l'accès aux valeurs de propriétés des objets interconnectés et imbriquées 
-            // quand il est possible qu'une fonction soit undefined ou null
+            const result = await httpClient.get<PokemonListResponse>(nextUrl);
             if (result?.data?.results) {
-                setPokemons(result.data.results)
+                const listPokemons = result.data.results.map(p => indexPokeToListPoke(p))
+                setPokemons([...pokemons, ...listPokemons])
+                setNextUrl(result.data.next)
             }
             console.log(result)
         }
     }
         
     return {
-            pokemons
+    pokemons,
+    fetchNextPage: fetchPokemon,
+    hasMorePokemon: !!nextUrl
     }
-}
+};
 
 export default usePokemons;

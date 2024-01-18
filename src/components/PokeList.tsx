@@ -1,9 +1,9 @@
-import { IndexedPokemon } from "../interfaces/pokemon.interface";
+import { IndexedPokemon, ListPokemon } from "../interfaces/pokemon.interface";
 import PokeCard  from "./PokeCard";
 import { Grid } from "@mui/material";
 
 interface PokeListProps {
-  pokemons: IndexedPokemon[];
+  pokemons: ListPokemon[];
 }
 
 function PokeList({ pokemons }: PokeListProps) {

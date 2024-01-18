@@ -1,19 +1,52 @@
-import { IndexedPokemon } from '../interfaces/pokemon.interface';
-import { Card, CardContent, Typography } from '@mui/material';
+import { ListPokemon } from '../interfaces/pokemon.interface';
+import { Card, CardContent, Typography, CardMedia, CardActionArea } from '@mui/material';
 import { Box } from '@mui/system';
+import { useEffect, useState } from 'react';
+import { getColorFromUrl } from '../utils/colors';
 
 interface PokeCardProps {
-    pokemon: IndexedPokemon
+    pokemon: ListPokemon;
 }
 
 const PokeCard = ({ pokemon }: PokeCardProps) => {
+    const [pokemonColor, setPokemonColor] = useState<string | null>
+    (null);
+
+    const getPokemonColor = async () => {
+        const color = await getColorFromUrl(pokemon.image);
+        if (color) setPokemonColor(color);
+    };
+
+    useEffect(() => {
+        getPokemonColor();
+    }, []);
+
     return (
-        <Card>
-            <CardContent>
-                <Box sx={{  display: "flex", justifyContent:"center" }}>
-                    <Typography>{pokemon.name}</Typography>  
-                </Box>
-            </CardContent>
+        <Card sx={{ backgroundColor: pokemonColor }}>
+            <CardActionArea>
+                <CardMedia
+                    component="img"
+                    image={pokemon.image}
+                    title={pokemon.name}
+                    sx={{ height: 100, objectFit: "contain" }}
+                />
+                <CardContent>
+                    <Box sx={{  
+                        display: "flex", 
+                        justifyContent:"center",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        color: "white",
+                    }}>
+                        <Typography sx={{ textTransform: "capitalize" }}>
+                            {pokemon.name}
+                        </Typography> 
+                        <Typography sx={{ textTransform: "capitalize" }}>
+                            #{pokemon.pokedexNumber}
+                        </Typography>
+                    </Box>
+                </CardContent>
+            </CardActionArea>
         </Card>
     );
 }
