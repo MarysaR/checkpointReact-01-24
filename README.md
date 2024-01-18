@@ -19,4 +19,5 @@ You will also see any lint errors in the console.
 - #### "react-router-dom": "^6.21.2",
 - #### "axios": "^1.6.5",
 - #### "typescript": "^4.9.5",
+- #### "fast-average-color": "^9.4.0"
 
