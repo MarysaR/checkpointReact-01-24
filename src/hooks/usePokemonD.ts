@@ -2,6 +2,7 @@ import { httpClient } from '../api/httpsClient';
 import { POKEMON_API_POKEMON_URL } from '../constants/pokemon.constants';
 import { DetailPokemon } from '../interfaces/pokemon.interface';
 import { useEffect, useState } from 'react';
+import { getColorFromUrl } from '../utils/colors';
 
 
 interface UsePokemonProps {
@@ -15,19 +16,32 @@ function usePokemonD({ pokemonName }: UsePokemonProps) {
     useEffect(() => {
         if (pokemonName) {
             fetchPokemon();
+        }
+    }, [pokemonName]);
+
+    useEffect(() => {
+        if (pokemon){
+            getPokemonColor()
+        }
+    }, [pokemon])
+
+    const getPokemonColor = async () => {
+        if (pokemon?.sprites?.other["official-artwork"]?.front_default){
+            const color = await getColorFromUrl(pokemon.sprites.other["official-artwork"].front_default)
+            if (color) setPokemon({...pokemon, color})
         };
-    });
+    };
 
     const fetchPokemon = async () => {
         if (pokemonName) {
             setIsLoaded(true);
             const url = `${POKEMON_API_POKEMON_URL}/${pokemonName}`;
             const result = await httpClient.get<DetailPokemon>(url);
-            if(result?.data) {
-                setPokemon(result.data)
+            if (result?.data) {
+              setPokemon(result.data);
             }
             setIsLoaded(false);
-        };
+          }
     };
 
     return {
@@ -35,7 +49,5 @@ function usePokemonD({ pokemonName }: UsePokemonProps) {
         isLoaded
     };
 }
-
-
 
 export default usePokemonD;

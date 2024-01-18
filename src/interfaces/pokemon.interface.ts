@@ -45,6 +45,7 @@ export interface PokemonStat {
 }
 
 export interface DetailPokemon {
+    id: number;
     name: string;
     types:PokemonType[];
     weight: number;
@@ -58,4 +59,5 @@ export interface DetailPokemon {
         };
     };
     stats: PokemonStat[];
+    color: string | null
 }
