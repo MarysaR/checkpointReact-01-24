@@ -41,7 +41,7 @@ function usePokemonD({ pokemonName }: UsePokemonProps) {
               setPokemon(result.data);
             }
             setIsLoaded(false);
-          }
+        }
     };
 
     return {
