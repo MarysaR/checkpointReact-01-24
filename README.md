@@ -30,7 +30,7 @@ You will also see any lint errors in the console.
 - Filtre par Type de Pokémons
 
 ## Paths
-### react-router-dom
+- ### react-router-dom
 - import { RouterProvider, createBrowserRouter } from 'react-router-dom';
   const router = createBrowserRouter([
   {
