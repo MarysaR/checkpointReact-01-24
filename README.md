@@ -30,7 +30,7 @@ You will also see any lint errors in the console.
 - Filtre par Type de Pokémons
 
 ## Paths
-#### react-router-dom
+### react-router-dom
 - import { RouterProvider, createBrowserRouter } from 'react-router-dom';
   const router = createBrowserRouter([
   {
@@ -44,9 +44,9 @@ You will also see any lint errors in the console.
 ]);
 
 ## Packages 
-- #### Fast Average Color
+- ### Fast Average Color
   #### Beugue sur certaines photos !! - ERROR - FastAverageColor: Error loading image (Fermer la fenêtre d'erreur)
   Une bibliothèque qui calcule la couleur moyenne de toutes les images pour Node.js
 
-- #### Mui/material 
+- ### Mui/material 
   Material UI est une bibliothèque de composants React open source qui implémente le Material Design de Google
