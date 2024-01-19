@@ -5,7 +5,7 @@ import { IndeType } from '../interfaces/pokemon.interface';
 
 function Accueil() {
   const { pokemons, hasMorePokemon, fetchNextPage, pokemonTypes, 
-    selectedType,  setSelectedType, setPokemons } = usePokemons();
+      setSelectedType, setPokemons } = usePokemons();
 
   const handleSelectType = (type: IndeType | null) => {
     if (type) {

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { httpClient } from '../api/httpsClient';
 import { POKEMON_API_POKEMON_URL } from '../constants/pokemon.constants';
 import { DetailPokemon } from '../interfaces/pokemon.interface';

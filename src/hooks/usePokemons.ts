@@ -18,6 +18,7 @@ function usePokemons() {
         } else {
           fetchPokemon();
         }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [selectedType]);
 
 
